@@ -1,0 +1,30 @@
+{
+  "name": "D3LC",
+  "version": "1.1.0",
+  "description": "Diablo 3 legendary counter",
+  "main": "main.js",
+  "scripts": {
+    "start" : "electron .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/norico/D3LC.git"
+  },
+  "keywords": [
+    "Diablo III",
+    "Diablo 3"
+  ],
+  "author": "Norico",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/norico/D3LC/issues"
+  },
+  "homepage": "https://github.com/norico/D3LC#readme",
+  "dependencies": {
+    "save-dev": "^0.0.1-security"
+  },
+  "devDependencies": {
+    "electron": "^12.0.2"
+  }
+}
