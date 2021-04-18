@@ -1,111 +1,73 @@
-const {app, BrowserWindow, ipcMain, globalShortcut} = require('electron')
+const { app , BrowserWindow, Menu, ipcMain, globalShortcut } = require('electron')
+const { screen, remote } = require('electron')
 
-const path = require('path')
-const fs   = require('fs')
+const config = require('./front/config')
 
-let window
+const template_menu = require('./front/menu-template')
+const menu = Menu.buildFromTemplate(template_menu)
 
-function createWindow () {
-    // Create the browser window.
-    window = mainWindow = new BrowserWindow({
-        width: 800,
-        height: 600,
+let mainWindow = null
 
-        icon: "diablo-iii.png",
 
+app.whenReady().then(
+    createMainWindow
+)
+
+function createMainWindow() {
+    mainWindow = new BrowserWindow({
+        show:false,
+        resizable:false,
+        frame: true,
+        width: 360,
+        height: 140,
+        minimizable:false,
+        autoHideMenuBar:true,
+        icon: './front/diablo-iii.png',
         webPreferences: {
             nodeIntegration: true,
             contextIsolation: false,
-            preload: path.join(__dirname, 'preload.js')
         }
     })
 
-    // and load the index.html of the app.
-    // mainWindow.loadFile('index.html')
-    mainWindow.loadURL(`file://${__dirname}/index.html`)
-    // mainWindow.loadURL('index.html')
+    //Set window position to bottom right of main screen
+    const { width, height } = screen.getPrimaryDisplay().workAreaSize
+    let posX = width-mainWindow.getSize()[0]-5
+    let posY = height-mainWindow.getSize()[1]-5
+    mainWindow.setBounds({ x: posX, y: posY })
 
-    // Open the DevTools.
-    mainWindow.webContents.openDevTools()
-
-}
-
-app.whenReady().then(() => {
-    createWindow()
+    mainWindow.loadURL(`file://${__dirname}/front/index.html`).then(mainWindow.show())
+    Menu.setApplicationMenu(menu)
+    app.setName(app.name)
     createShortcuts()
-    app.on('activate', function () {
-        if (BrowserWindow.getAllWindows().length === 0) createWindow()
-    })
+    console.log(app.name + " Started")
+}
+
+app.on('window-all-closed', () => {
+    app.quit()
+    console.log(app.name + " END")
 })
 
-function createShortcuts(){
-    const ADD = globalShortcut.register('F5', () => {
-        console.log( 'F5 is pressed' )
-        window.send('ADD')
-    })
-    const REMOVE = globalShortcut.register('F6', () => {
-        console.log( 'F6 is pressed' )
-        window.send('REMOVE')
-    })
-    const RESET = globalShortcut.register('Alt+CommandOrControl+F1', () => {
-        console.log( 'CommandOrControl + ALT + F1  is pressed' )
-        window.send('RESET')
-    })
+ipcMain.on('menu', (event, args)=>{
+    if ( args.value === "true" ){
+        Menu.getApplicationMenu().getMenuItemById(args.key).checked = args.value
+    }
+})
 
-    const SAVE = globalShortcut.register('CommandOrControl+S', () => {
-        console.log( 'CommandOrControl + S  is pressed' )
-        window.send('SAVE')
+ipcMain.on('counter', (event, counter)=>{
+    // Receive signal to update app title with counter value
+    // mainWindow.setTitle(app.name+' '+ counter)
+})
+
+
+function createShortcuts() {
+    globalShortcut.register(config.shortcuts.ADD_KEY, () => {
+        mainWindow.send('shortcut', 'ADD')
+    })
+    globalShortcut.register(config.shortcuts.REMOVE_KEY, () => {
+        mainWindow.send('shortcut', 'REMOVE')
+    })
+    globalShortcut.register(config.shortcuts.RESET_KEY, () => {
+        mainWindow.send('shortcut', 'RESET')
     })
 }
 
-ipcMain.on('counter-init', (event) => {
-    console.log("Electron request counter value (counter-init)")
-    let counter_value = counter("read")
-    event.sender.send('counter-init', counter_value)
-})
-
-ipcMain.on('counter-save', (event, data) => {
-    console.log("Electron save data with value: " + data)
-    counter("save", data)
-})
-
-ipcMain.on('counter-value', (event, data) => {
-    console.log( 'counter ' + data )
-})
-
-app.on('quit', (event) => {
-
-    ipcMain.emit('counter-value')
-
-    globalShortcut.unregisterAll()
-    if (process.platform !== 'darwin'){
-        app.quit()
-    }
-    console.log('Done !')
-})
-
-function counter(action, data){
-    let filename = "data.txt"
-    if( action === "save"){
-        console.log( 'Saving file ' + filename)
-        fs.writeFile(filename, data, "utf-8", (error, data) => {
-            if (error) {
-                console.error("error: " + error);
-            }
-        })
-    }
-    if( action === "read"){
-        try {
-            fs.accessSync(filename, fs.constants.R_OK | fs.constants.W_OK)
-            return fs.readFileSync(filename).toString()
-        }
-        catch {
-            fs.writeFile(filename, '0', "utf-8", (error, data) => {
-                if (error) {
-                    console.error("error: " + error);
-                }
-            })
-            return "0"
-        }
-    }
-}

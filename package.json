@@ -1,30 +1,25 @@
 {
-  "name": "D3LC",
-  "version": "1.1.0",
-  "description": "Diablo 3 legendary counter",
+  "name": "D3-legendary-counter",
+  "version": "2.1.2",
+  "description": "D3 Legendary Counter",
+  "icon": "./front/diablo-iii.png",
   "main": "main.js",
-  "scripts": {
-    "start" : "electron .",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/norico/D3LC.git"
-  },
-  "keywords": [
-    "Diablo III",
-    "Diablo 3"
-  ],
-  "author": "Norico",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/norico/D3LC/issues"
-  },
-  "homepage": "https://github.com/norico/D3LC#readme",
-  "dependencies": {
-    "save-dev": "^0.0.1-security"
-  },
   "devDependencies": {
     "electron": "^12.0.2"
-  }
+  },
+  "author": "norico",
+  "scripts": {
+    "start": "electron .",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "build": {
+    "appId": "D3LC",
+    "icon": "./front/diablo-iii.png",
+    "mac": {
+      "category": "game utility"
+    }
+  },
+  "license": "ISC"
 }
