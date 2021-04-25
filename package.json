@@ -1,6 +1,6 @@
 {
   "name": "D3-legendary-counter",
-  "version": "2.4.1",
+  "version": "2.4.3",
   "description": "D3 Legendary Counter",
   "main": "index.js",
   "scripts": {

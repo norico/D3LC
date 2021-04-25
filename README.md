@@ -9,3 +9,6 @@ Small app to count Diablo3 legendary
 use overlay in obs or streamlab obs
 uri : http://localhost:3000/
 
+
+2.4.3 
+Fix Windows init counter

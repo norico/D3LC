@@ -50,4 +50,5 @@ ipcMain.on('counter:init', () => {
 })
 ipcMain.on('counter:value', (event, counter_value) => {
     server.send(counter_value)
+    global.counter = counter_value
 })

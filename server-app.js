@@ -13,16 +13,17 @@ httpServer.listen(3000, ()=>{
 })
 
 io.on('connection', (socket) =>{
-    console.log('Demande du counter')
-    if( global.counter === 'undefined' ) {
+    // console.log('Resquest :: connection')
+    if( counter === 'undefined' ) {
+        //TODO: AUTO REQUEST
         console.log('must refresh')
     }else {
-        send( global.counter )
+        send( counter )
     }
 })
 
 io.on('overlay', (socket) =>{
-    console.log('Demande du counter :: Overlay')
+    // console.log('Resquest :: Overlay')
 })
 
 function send(data) {
