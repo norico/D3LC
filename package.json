@@ -1,17 +1,14 @@
 {
   "name": "D3-legendary-counter",
-  "version": "2.3",
+  "version": "2.4.1",
   "description": "D3 Legendary Counter",
-  "main": "./src/main.js",
+  "main": "index.js",
   "scripts": {
     "start": "electron .",
     "build": "electron-builder",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [
-    "diablo 3",
-    "counter"
-  ],
+  "keywords": [],
   "author": "norico <norico@gmailm.com>",
   "license": "ISC",
   "dependencies": {
@@ -27,7 +24,7 @@
   },
   "build": {
     "appId": "d3-legendary-counter",
-    "icon": "src/diablo-iii.png",
+    "icon": "diablo-iii.png",
     "mac": {
       "category": "utilities"
     }

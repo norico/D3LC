@@ -1,7 +1,6 @@
 * {
     margin:0;
-    padding: 0;
-    box-sizing: border-box;
+    padding:0;
 }
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
@@ -15,4 +14,10 @@ section {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
+}
+
+#counter {
+    font-size: 6em;
+    font-weight: bold;
+    -webkit-text-stroke: .02em #C0C0C0;
 }

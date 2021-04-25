@@ -2,7 +2,7 @@ const config = {
     'config' : {
         'dev'  : false,
         'name' : "Diablo3 Primo Counter",
-        'icon' : './src/public/images/diablo-iii-64x64.png'
+        'icon' : './diablo-iii.png'
     },
     'host' : {
         'name' : 'localhost',
