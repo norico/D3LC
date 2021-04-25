@@ -7,5 +7,5 @@ Small app to count Diablo3 legendary
 - CTRL+ALT +F1 - RESET
 
 use overlay in obs or streamlab obs
-uri : http://locahost:3000/
+uri : http://localhost:3000/
 
