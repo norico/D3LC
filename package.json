@@ -1,6 +1,6 @@
 {
   "name": "D3-legendary-counter",
-  "version": "2.4.3",
+  "version": "2.4.4",
   "description": "D3 Legendary Counter",
   "main": "index.js",
   "scripts": {
@@ -15,8 +15,7 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "nodemon": "^2.0.7",
-    "socket.io": "^4.0.1",
-    "socket.io-client": "^4.0.1"
+    "socket.io": "^4.0.1"
   },
   "devDependencies": {
     "electron": "^12.0.5",
