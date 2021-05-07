@@ -1,31 +1,30 @@
 {
-  "name": "D3-legendary-counter",
-  "version": "2.4.4",
+  "name": "d3-legendary-counter",
+  "version": "2.5.0",
   "description": "D3 Legendary Counter",
-  "main": "index.js",
+  "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "build": "electron-builder",
+    "patch": "npm version patch && electron .",
+    "dist": "npm version minor && electron-builder",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "norico <norico@gmailm.com>",
+  "author": "",
   "license": "ISC",
   "dependencies": {
-    "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "nodemon": "^2.0.7",
     "socket.io": "^4.0.1"
   },
-  "devDependencies": {
-    "electron": "^12.0.5",
-    "electron-builder": "^22.10.5"
-  },
   "build": {
-    "appId": "d3-legendary-counter",
+    "appId": "d3-primo-counter",
     "icon": "diablo-iii.png",
     "mac": {
       "category": "utilities"
     }
+  },
+  "devDependencies": {
+    "electron": "^12.0.6",
+    "electron-builder": "^22.10.5"
   }
 }

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Overlay</title>
+  <style>
+    * {
+      margin:0;
+      padding:0;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 10em;
+      font-weight: bold;
+      background-color: #00FF00;
+    }
+    section {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      text-align: center;
+    }
+    #counter {
+      color: #C0C0C0;
+      -webkit-text-stroke: 3px #444444;
+    }
+  </style>
+</head>
+<body>
+<section>
+  <div id="counter">
+    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="margin: auto; background: rgb(0, 255, 0); display: block; shape-rendering: auto;" width="200px" height="200px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
+      <g transform="translate(20 50)">
+        <circle cx="0" cy="0" r="6" fill="#101010">
+          <animateTransform attributeName="transform" type="scale" begin="-0.375s" calcMode="spline" keySplines="0.3 0 0.7 1;0.3 0 0.7 1" values="0;1;0" keyTimes="0;0.5;1" dur="1s" repeatCount="indefinite"></animateTransform>
+        </circle>
+      </g><g transform="translate(40 50)">
+      <circle cx="0" cy="0" r="6" fill="#224634">
+        <animateTransform attributeName="transform" type="scale" begin="-0.25s" calcMode="spline" keySplines="0.3 0 0.7 1;0.3 0 0.7 1" values="0;1;0" keyTimes="0;0.5;1" dur="1s" repeatCount="indefinite"></animateTransform>
+      </circle>
+    </g><g transform="translate(60 50)">
+      <circle cx="0" cy="0" r="6" fill="#2f6144">
+        <animateTransform attributeName="transform" type="scale" begin="-0.125s" calcMode="spline" keySplines="0.3 0 0.7 1;0.3 0 0.7 1" values="0;1;0" keyTimes="0;0.5;1" dur="1s" repeatCount="indefinite"></animateTransform>
+      </circle>
+    </g><g transform="translate(80 50)">
+      <circle cx="0" cy="0" r="6" fill="#416753">
+        <animateTransform attributeName="transform" type="scale" begin="0s" calcMode="spline" keySplines="0.3 0 0.7 1;0.3 0 0.7 1" values="0;1;0" keyTimes="0;0.5;1" dur="1s" repeatCount="indefinite"></animateTransform>
+      </circle>
+    </g>
+    </svg>
+  </div>
+</section>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+  const socket = io()
+  socket.on("counter", (data) => {
+    document.getElementById("counter").innerText = data
+  })
+</script>
+</body>
+</html>

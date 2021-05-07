@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
+    <title>Electron</title>
+    <style>
+      * {
+        margin:0;
+        padding:0;
+      }
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        background: #343a40;
+        color: #f8f9fa;
+      }
+
+      section {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+      }
+
+      #counter {
+        font-size: 6em;
+        font-weight: bold;
+        -webkit-text-stroke: .02em #C0C0C0;
+      }
+    </style>
+</head>
+<body>
+<section>
+  <div id="counter"></div>
+</section>
+<script>
+    const {ipcRenderer} = require('electron')
+    const {counter} = require('./counter')
+    let counter_value = localStorage.getItem('counter') || 0
+
+    ipcRenderer.send('ipc:counter', counter_value )
+    document.getElementById('counter').innerText = counter_value
+
+    ipcRenderer.on('ipc:counter', (event, action) =>{
+        counter(action)
+        ipcRenderer.send('ipc:counter', counter_value )
+    })
+</script>
+</body>
+</html>
